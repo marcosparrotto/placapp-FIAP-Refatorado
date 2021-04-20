@@ -1,6 +1,5 @@
 package com.ghostapps.placapp.viewModel.gameScore
 
-import android.content.Intent
 import com.ghostapps.placapp.domain.models.RecordModel
 import com.ghostapps.placapp.domain.useCases.InsertRegister
 import com.ghostapps.placapp.viewModel.BaseViewModel
@@ -9,7 +8,7 @@ import java.util.*
 class GameScoreViewModel(
     private val contract: GameScoreContract,
     private val insertRegister: InsertRegister
-): BaseViewModel() {
+) : BaseViewModel() {
 
     var homeTeamName = ""
     var awayTeamName = ""
@@ -43,8 +42,8 @@ class GameScoreViewModel(
 
     fun onHomeTeamIncrease() {
         homeTeamScore++
-        if (homeTeamScore > 24 && ((homeTeamScore - awayTeamScore)>1)) {
-            when(rodadaNumber){
+        if (homeTeamScore > 24 && ((homeTeamScore - awayTeamScore) > 1)) {
+            when (rodadaNumber) {
                 1 -> {
                     homeTeamScore1 = homeTeamScore
                     awayTeamScore1 = awayTeamScore
@@ -72,27 +71,31 @@ class GameScoreViewModel(
             homeTeamSet++
         }
         updateScore()
-        if(homeTeamSet>2) {
+        if (homeTeamSet > 2) {
             contract.homeWinner()
             Thread {
                 val success = insertRegister.execute(
                     RecordModel(
-                    homeTeamName = homeTeamName,
-                    homeTeamScore1 = homeTeamScore1,
-                    homeTeamScore2 = homeTeamScore2,
-                    homeTeamScore3 = homeTeamScore3,
-                    homeTeamScore4 = homeTeamScore4,
-                    homeTeamScore5 = homeTeamScore5,
-                    homeTeamSet = homeTeamSet,
-                    awayTeamName = awayTeamName,
-                    awayTeamScore1 = awayTeamScore1,
-                    awayTeamScore2 = awayTeamScore2,
-                    awayTeamScore3 = awayTeamScore3,
-                    awayTeamScore4 = awayTeamScore4,
-                    awayTeamScore5 = awayTeamScore5,
-                    awayTeamSet = awayTeamSet,
-                    date = Date().time
-                )
+                        homeTeamName = homeTeamName,
+                        homeTeamScore = arrayOf(
+                            homeTeamScore1,
+                            homeTeamScore2,
+                            homeTeamScore3,
+                            homeTeamScore4,
+                            homeTeamScore5
+                        ),
+                        homeTeamSet = homeTeamSet,
+                        awayTeamName = awayTeamName,
+                        awayTeamScore = arrayOf(
+                            awayTeamScore1,
+                            awayTeamScore2,
+                            awayTeamScore3,
+                            awayTeamScore4,
+                            awayTeamScore5
+                        ),
+                        awayTeamSet = awayTeamSet,
+                        date = Date().time
+                    )
                 )
 
                 contract.onExitPressed()
@@ -109,8 +112,8 @@ class GameScoreViewModel(
 
     fun onAwayTeamIncrease() {
         awayTeamScore++
-        if (awayTeamScore > 24 && ((awayTeamScore - homeTeamScore)>1)) {
-            when(rodadaNumber){
+        if (awayTeamScore > 24 && ((awayTeamScore - homeTeamScore) > 1)) {
+            when (rodadaNumber) {
                 1 -> {
                     homeTeamScore1 = homeTeamScore
                     awayTeamScore1 = awayTeamScore
@@ -138,26 +141,32 @@ class GameScoreViewModel(
             awayTeamSet++
         }
         updateScore()
-        if(awayTeamSet>2) {
+        if (awayTeamSet > 2) {
             contract.awayWinner()
             Thread {
-                val success = insertRegister.execute(RecordModel(
-                    homeTeamName = homeTeamName,
-                    homeTeamScore1 = homeTeamScore1,
-                    homeTeamScore2 = homeTeamScore2,
-                    homeTeamScore3 = homeTeamScore3,
-                    homeTeamScore4 = homeTeamScore4,
-                    homeTeamScore5 = homeTeamScore5,
-                    homeTeamSet = homeTeamSet,
-                    awayTeamName = awayTeamName,
-                    awayTeamScore1 = awayTeamScore1,
-                    awayTeamScore2 = awayTeamScore2,
-                    awayTeamScore3 = awayTeamScore3,
-                    awayTeamScore4 = awayTeamScore4,
-                    awayTeamScore5 = awayTeamScore5,
-                    awayTeamSet = awayTeamSet,
-                    date = Date().time
-                ))
+                val success = insertRegister.execute(
+                    RecordModel(
+                        homeTeamName = homeTeamName,
+                        homeTeamScore = arrayOf(
+                            homeTeamScore1,
+                            homeTeamScore2,
+                            homeTeamScore3,
+                            homeTeamScore4,
+                            homeTeamScore5
+                        ),
+                        homeTeamSet = homeTeamSet,
+                        awayTeamName = awayTeamName,
+                        awayTeamScore = arrayOf(
+                            awayTeamScore1,
+                            awayTeamScore2,
+                            awayTeamScore3,
+                            awayTeamScore4,
+                            awayTeamScore5
+                        ),
+                        awayTeamSet = awayTeamSet,
+                        date = Date().time
+                    )
+                )
 
                 contract.onExitPressed()
 

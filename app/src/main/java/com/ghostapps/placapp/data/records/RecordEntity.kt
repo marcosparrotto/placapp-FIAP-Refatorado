@@ -2,41 +2,21 @@ package com.ghostapps.placapp.data.records
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.ghostapps.placapp.data.records.utils.ListConverter
 import com.ghostapps.placapp.domain.models.RecordModel
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = RecordEntity.TABLE_NAME)
 class RecordEntity(
 
-    @SerializedName("team_a_name")
     val homeTeamName: String,
-    @SerializedName("team_a_set")
     val homeTeamSet: Int,
-    @SerializedName("team_a_score1")
-    val homeTeamScore1: Int,
-    @SerializedName("team_a_score2")
-    val homeTeamScore2: Int,
-    @SerializedName("team_a_score3")
-    val homeTeamScore3: Int,
-    @SerializedName("team_a_score4")
-    val homeTeamScore4: Int,
-    @SerializedName("team_a_score5")
-    val homeTeamScore5: Int,
+    val homeTeamScore: Array<Int>,
 
-    @SerializedName("team_b_name")
     val awayTeamName: String,
-    @SerializedName("team_b_set")
     val awayTeamSet: Int,
-    @SerializedName("team_b_score1")
-    val awayTeamScore1: Int,
-    @SerializedName("team_b_score2")
-    val awayTeamScore2: Int,
-    @SerializedName("team_b_score3")
-    val awayTeamScore3: Int,
-    @SerializedName("team_b_score4")
-    val awayTeamScore4: Int,
-    @SerializedName("team_b_score5")
-    val awayTeamScore5: Int,
+    val awayTeamScore: Array<Int>,
 
     @PrimaryKey
     @SerializedName("timestamp")
@@ -48,18 +28,10 @@ class RecordEntity(
         fun fromModel(recordModel: RecordModel): RecordEntity {
             return RecordEntity(
                 homeTeamName = recordModel.homeTeamName,
-                homeTeamScore1 = recordModel.homeTeamScore1,
-                homeTeamScore2 = recordModel.homeTeamScore2,
-                homeTeamScore3 = recordModel.homeTeamScore3,
-                homeTeamScore4 = recordModel.homeTeamScore4,
-                homeTeamScore5 = recordModel.homeTeamScore5,
+                homeTeamScore = recordModel.homeTeamScore,
                 homeTeamSet = recordModel.homeTeamSet,
                 awayTeamName = recordModel.awayTeamName,
-                awayTeamScore1 = recordModel.awayTeamScore1,
-                awayTeamScore2 = recordModel.awayTeamScore2,
-                awayTeamScore3 = recordModel.awayTeamScore3,
-                awayTeamScore4 = recordModel.awayTeamScore4,
-                awayTeamScore5 = recordModel.awayTeamScore5,
+                awayTeamScore = recordModel.awayTeamScore,
                 awayTeamSet = recordModel.awayTeamSet,
                 date = recordModel.date
             )
@@ -69,18 +41,10 @@ class RecordEntity(
     fun toModel(): RecordModel {
         return RecordModel(
             homeTeamName = homeTeamName,
-            homeTeamScore1 = homeTeamScore1,
-            homeTeamScore2 = homeTeamScore2,
-            homeTeamScore3 = homeTeamScore3,
-            homeTeamScore4 = homeTeamScore4,
-            homeTeamScore5 = homeTeamScore5,
+            homeTeamScore = homeTeamScore,
             homeTeamSet = homeTeamSet,
             awayTeamName = awayTeamName,
-            awayTeamScore1 = awayTeamScore1,
-            awayTeamScore2 = awayTeamScore2,
-            awayTeamScore3 = awayTeamScore3,
-            awayTeamScore4 = awayTeamScore4,
-            awayTeamScore5 = awayTeamScore5,
+            awayTeamScore = awayTeamScore,
             awayTeamSet = awayTeamSet,
             date = date
         )
