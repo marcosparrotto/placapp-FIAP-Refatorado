@@ -93,8 +93,7 @@ class GameScoreViewModel(
                             awayTeamScore4,
                             awayTeamScore5
                         ),
-                        awayTeamSet = awayTeamSet,
-                        date = Date().time
+                        awayTeamSet = awayTeamSet
                     )
                 )
 
@@ -163,8 +162,7 @@ class GameScoreViewModel(
                             awayTeamScore4,
                             awayTeamScore5
                         ),
-                        awayTeamSet = awayTeamSet,
-                        date = Date().time
+                        awayTeamSet = awayTeamSet
                     )
                 )
 

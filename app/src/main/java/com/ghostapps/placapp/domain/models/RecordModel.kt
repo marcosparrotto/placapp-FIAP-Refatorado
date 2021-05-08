@@ -9,5 +9,5 @@ class RecordModel(
     val awayTeamSet: Int,
     val awayTeamScore: Array<Int>,
 
-    val date: Long
+    val documentId: String = ""
 )

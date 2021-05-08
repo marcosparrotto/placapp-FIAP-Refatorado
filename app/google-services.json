@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "861407889592",
+    "firebase_url": "https://fiap-avaliacao-default-rtdb.firebaseio.com",
+    "project_id": "fiap-avaliacao",
+    "storage_bucket": "fiap-avaliacao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861407889592:android:09ed5524164bdef04e0c4d",
+        "android_client_info": {
+          "package_name": "com.ghostapps.placapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861407889592-jg5o3l055kvhqo4vjda4urovv0qr39l2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlub4SdHRclkO6o4zV0bqWFBRA2h8wqsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861407889592-jg5o3l055kvhqo4vjda4urovv0qr39l2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

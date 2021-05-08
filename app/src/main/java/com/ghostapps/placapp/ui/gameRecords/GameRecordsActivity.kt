@@ -9,16 +9,21 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghostapps.placapp.R
 import com.ghostapps.placapp.databinding.ActivityGameRecordsBinding
+import com.ghostapps.placapp.domain.models.RecordModel
 import com.ghostapps.placapp.ui.gameRecords.adapter.RecordsListAdapter
 import com.ghostapps.placapp.viewModel.gameRecords.GameRecordsViewModel
 import kotlinx.android.synthetic.main.activity_game_records.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 
 class GameRecordsActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityGameRecordsBinding
     private val viewModel: GameRecordsViewModel by viewModel { parametersOf(this) }
+    private val scope = CoroutineScope(newSingleThreadContext("name"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +41,7 @@ class GameRecordsActivity: AppCompatActivity() {
                     .setTitle("Remover Registro")
                     .setMessage("Tem certeza que quer remover esse registro? Essa operação não poderá ser desfeita")
                     .setPositiveButton("Sim, quero remover") { _, _ ->
-                        viewModel.deleteRegister(gameRecord)
+                        deleteRegister(gameRecord)
                         dialog?.cancel()
                     }
                     .setNegativeButton("Deixa quieto") {_, _ ->
@@ -48,7 +53,16 @@ class GameRecordsActivity: AppCompatActivity() {
             gameRecordsList.adapter = adapter
         })
 
-        viewModel.loadRecords()
+        loadRecords()
+    }
+
+    private fun deleteRegister(gameRecord: RecordModel) {
+        scope.launch { viewModel.deleteRegister(gameRecord) }
+    }
+
+
+    private fun loadRecords() {
+        scope.launch { viewModel.loadRecords() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

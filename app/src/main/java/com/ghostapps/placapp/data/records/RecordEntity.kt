@@ -1,13 +1,9 @@
 package com.ghostapps.placapp.data.records
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.ghostapps.placapp.data.records.utils.ListConverter
 import com.ghostapps.placapp.domain.models.RecordModel
-import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = RecordEntity.TABLE_NAME)
+
+
 class RecordEntity(
 
     val homeTeamName: String,
@@ -18,9 +14,7 @@ class RecordEntity(
     val awayTeamSet: Int,
     val awayTeamScore: Array<Int>,
 
-    @PrimaryKey
-    @SerializedName("timestamp")
-    val date: Long
+    val documentId: String = ""
 ) {
     companion object {
         const val TABLE_NAME = "records_database"
@@ -32,21 +26,23 @@ class RecordEntity(
                 homeTeamSet = recordModel.homeTeamSet,
                 awayTeamName = recordModel.awayTeamName,
                 awayTeamScore = recordModel.awayTeamScore,
-                awayTeamSet = recordModel.awayTeamSet,
-                date = recordModel.date
+                awayTeamSet = recordModel.awayTeamSet
             )
+        }
+
+        fun toModel(recordEntity: RecordEntity, id: String): RecordModel {
+            return RecordModel(
+            homeTeamName = recordEntity.homeTeamName,
+            homeTeamScore = recordEntity.homeTeamScore,
+            homeTeamSet = recordEntity.homeTeamSet,
+            awayTeamName = recordEntity.awayTeamName,
+            awayTeamScore = recordEntity.awayTeamScore,
+            awayTeamSet = recordEntity.awayTeamSet,
+
+            documentId = id
+            )
+
         }
     }
 
-    fun toModel(): RecordModel {
-        return RecordModel(
-            homeTeamName = homeTeamName,
-            homeTeamScore = homeTeamScore,
-            homeTeamSet = homeTeamSet,
-            awayTeamName = awayTeamName,
-            awayTeamScore = awayTeamScore,
-            awayTeamSet = awayTeamSet,
-            date = date
-        )
-    }
 }
